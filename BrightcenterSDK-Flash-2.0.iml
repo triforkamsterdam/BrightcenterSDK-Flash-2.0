@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="BrightcenterSDK-Flash-2.0">
+    <configurations>
+      <configuration name="BrightcenterSDK-Flash-2.0" target-platform="Mobile" main-class="BrightcenterSDKFlash20" output-file="BrightcenterSDKFlash20.swf" output-folder="$USER_HOME$/Downloads/BrightcenterSDK-Flash-2.0/out/production/BrightcenterSDK-Flash-2.0">
+        <dependencies target-player="11.1">
+          <entries>
+            <entry library-id="7433790c-bbf2-4116-8d62-05569726dc6e">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="flex_sdk_newest" />
+        </dependencies>
+        <compiler-options />
+        <packaging-air-desktop />
+        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/BrightcenterSDKFlash20-app2.xml" package-file-name="BrightcenterSDKFlash20" />
+        <packaging-ios enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/BrightcenterSDKFlash20-app2.xml" package-file-name="BrightcenterSDKFlash20">
+          <AirSigningOptions sdk="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk" />
+        </packaging-ios>
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="flex_sdk_newest" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="7433790c-bbf2-4116-8d62-05569726dc6e" />
+        <CLASSES>
+          <root url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/libs/air" />
+          <root url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/libs/player/14.0" />
+          <root url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/libs" />
+          <root url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/locale/en_US" />
+          <root url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/locale/fr_FR" />
+          <root url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/locale/ja_JP" />
+          <root url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/locale/zh_CN" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/samples/badge" />
+          <root url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/projects/air/Core/src" />
+          <root url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/projects/air/Licensing/Android/Lib/src" />
+          <root url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/projects/air/ApplicationUpdater/src/ApplicationUpdater" />
+          <root url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/projects/air/ApplicationUpdater/src/ApplicationUpdaterDialogs" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/libs" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/libs/air" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/libs/player/14.0" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/locale/en_US" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/locale/fr_FR" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/locale/ja_JP" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/locale/zh_CN" recursive="false" />
+      </library>
+    </orderEntry>
+  </component>
+</module>
+
