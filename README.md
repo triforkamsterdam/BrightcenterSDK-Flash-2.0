@@ -39,10 +39,10 @@ You can acces the student that is picked by using: `BrightcenterController.stude
  ```
  
  
- ```Posting a result
+ ###Posting a result
  to post a result you can call `BrightcenterController.postResult(result:Result, assessmentId:String, callBackError:Function)` The callback will only be called when an error occured.
  
- ```retrieve results
+ ###retrieve results
  To retrieve a result you can call `BrightcenterController.getResults(assessmentId:String, personId:String, callBackSucces:Function, callBackError:Function)`. The succes callback will return you an array with all the results of the student. The error callback will be called when something went wrong. The personId of a student can be retrieved by using `BrightcenterController.student.getPersonId();`
  
  See the demo files for examples.
