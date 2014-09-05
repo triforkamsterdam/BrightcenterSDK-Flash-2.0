@@ -34,9 +34,8 @@ To use the sdk you need to do a few things. First you'll need to put the followi
  
 You can acces the student that is picked by using: `BrightcenterController.student` You can look into the `student.as` file for which variables it has.
 
- ```Open the Brightcenter App
+###Open the Brightcenter App
  To open the brightcenter app you can call `BrightcenterController.openBrightcenterApp(assessmentId:String);` the assessment id can also be empty but NOT null! This function will open the brightcenter app with the given assessmentId.
- ```
  
  
  ###Posting a result
