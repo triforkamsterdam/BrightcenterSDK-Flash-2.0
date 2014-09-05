@@ -33,6 +33,7 @@ public class BrightcenterController {
     static var assessmentIdFromUrl:String;
     static var baseURL:String = "http://www.brightcenter.nl/dashboard/api";
     static var appUrl:String;
+    static var callBack:Function;
     public function BrightcenterController() {
         trace("init brightcenterController")
     }
@@ -49,6 +50,7 @@ public class BrightcenterController {
         trace("on invoke!");
         if(event.arguments[0]!=null) {
             BrightcenterController.handleUrl(event.arguments[0]);
+            BrightcenterController.callBack();
         }
     }
 
@@ -140,8 +142,9 @@ public class BrightcenterController {
         }
     }
 
-    static function openBrightcenterApp(assessmentId:String):void{
-        trace("opening app");
+    static function openBrightcenterApp(assessmentId:String, callBack:Function):void{
+        trace("opening brightcenter app");
+        BrightcenterController.callBack = callBack;
         navigateToURL(new URLRequest("brightcenterApp://protocolName/" + BrightcenterController.appUrl + "/assessmentId/" + assessmentId));
     }
 }

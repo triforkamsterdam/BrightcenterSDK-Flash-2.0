@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<s:ViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns="http://ns.adobe.com/air/application/3.1"
-        preinitialize="BrightcenterController.application_preinitializeHandler(event)">
-    <s:navigationContent>
-        <s:Button label="Home" click="BrightcenterController.openBrightcenterApp('987-654-321');"/>
-        <s:Button label="post result!" click="postResult()"/>
-        <s:Button label="load results!" click="loadResults()"/>
-    </s:navigationContent>
-
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns="http://ns.adobe.com/air/application/3.1"
+        preinitialize="BrightcenterController.callBack = appSwitchCallBack; BrightcenterController.application_preinitializeHandler(event);">
+        <s:Button label="open bc with assessment" click="BrightcenterController.openBrightcenterApp('2', appSwitchCallBack);" x="20" y="20" height="50"/>
+        <s:Button label="open bc without assessment" click="BrightcenterController.openBrightcenterApp('', appSwitchCallBack);" x="20" y="80" height="50"/>
+        <s:Button label="post result!" click="postResult()" x="20" y="140" height="50"/>
+        <s:Button label="load results!" click="loadResults()" x="20" y="200" height="50"/>
 
     <fx:Script>
 
         <![CDATA[
+        import spark.components.Label;
+
         BrightcenterController.appUrl = "brightcenterAppClientFlash"
         function postResult():void{
-            BrightcenterController.postResult(new Result("1", new Date(1408445294992), 2, 11, 3, CompletionStatusEnum.COMPLETED), BrightcenterController.assessmentIdFromUrl, function ():void{
+            BrightcenterController.postResult(new Result("a", new Date(1408445294992), 2, 11, 3, CompletionStatusEnum.COMPLETED), BrightcenterController.assessmentIdFromUrl, function ():void{
                 trace("something went wrong with posting a result")
 
             });
@@ -28,9 +28,18 @@
             });
         }
 
+        function appSwitchCallBack(){
+            var studentLabel:Label = new Label();
+            studentLabel.move(20,  260);
+            var student:Student = BrightcenterController.student;
+            if(student != null){
+                studentLabel.text  = student.getFirstName() + " " + student.getLastName();
+            }
+            addElement(studentLabel);
+        }
         ]]>
     </fx:Script>
 
-</s:ViewNavigatorApplication>
+</s:Application>
 
 
