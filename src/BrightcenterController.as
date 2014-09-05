@@ -24,9 +24,6 @@ import mx.utils.Base64Decoder;
 
 public class BrightcenterController {
 
-
-    //https://forums.adobe.com/message/3596513
-
     static var testUrl:String = "brightcenterAppClientCorona://data/eyJsYXN0TmFtZSI6IkJyb3V3ZXIiLCJwZXJzb25JZCI6IjUyYjMwYjRiMzAwNDdjZjlkZWQ5OGM3NiIsImZpcnN0TmFtZSI6Ikx1dWsifQ==/cookie/26A242C9773D40DE4033B5DCDEEB7755/assessmentId/987-654-321";
     static var student:Student;
     static var cookie:String;
