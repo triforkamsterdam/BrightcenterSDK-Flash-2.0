@@ -38,6 +38,7 @@ You can acces the student that is picked by using: `BrightcenterController.stude
  To open the brightcenter app you can call `BrightcenterController.openBrightcenterApp(assessmentId:String);` the assessment id can also be empty but NOT null! This function will open the brightcenter app with the given assessmentId.
  
  
+BEFORE YOU MAKE THE FOLLOWING CALLS MAKE SURE YOUR APP IS OPENED BY URL OR APP!
 ###Posting a result
  to post a result you can call `BrightcenterController.postResult(result:Result, assessmentId:String, callBackError:Function)` The callback will only be called when an error occured.
  
