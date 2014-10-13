@@ -10,6 +10,7 @@ import flash.desktop.NativeApplication;
 import flash.events.Event;
 import flash.events.IOErrorEvent;
 import flash.events.InvokeEvent;
+import flash.events.MouseEvent;
 import flash.net.URLLoader;
 import flash.net.URLLoaderDataFormat;
 import flash.net.URLRequest;
@@ -17,9 +18,14 @@ import flash.net.URLRequestHeader;
 import flash.net.URLRequestMethod;
 import flash.net.navigateToURL;
 
+import mx.core.FlexGlobals;
+
 import mx.events.FlexEvent;
 
 import mx.utils.Base64Decoder;
+
+import spark.components.Button;
+import spark.components.Group;
 
 
 public class BrightcenterController {
@@ -143,6 +149,23 @@ public class BrightcenterController {
         trace("opening brightcenter app");
         BrightcenterController.callBack = callBack;
         navigateToURL(new URLRequest("brightcenterApp://protocolName/" + BrightcenterController.appUrl + "/assessmentId/" + assessmentId));
+    }
+
+    static function createBrightcenterButton(assessmentId:String, callBack:Function):Button{
+        trace(FlexGlobals.topLevelApplication.width + " x " + FlexGlobals.topLevelApplication.height);
+        var container = new Group();
+        var screenWidth = FlexGlobals.topLevelApplication.width;
+        var screenHeight = FlexGlobals.topLevelApplication.height;
+
+        var button = new Button();
+        button.x = screenWidth - 150;
+        button.y = screenHeight - 150;
+        button.setStyle("skinClass", Class(BrightcenterButtonSkin));
+
+        button.addEventListener("click", function myBtn_clickHandler(event:MouseEvent):void {
+            openBrightcenterApp(assessmentId, callBack);
+        });
+        return button;
     }
 }
 }

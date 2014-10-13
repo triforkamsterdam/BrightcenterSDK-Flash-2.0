@@ -2,7 +2,7 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="BrightcenterSDK-Flash-2.0">
     <configurations>
-      <configuration name="BrightcenterSDK-Flash-2.0" target-platform="Mobile" main-class="BrightcenterSDKFlash20" output-file="BrightcenterSDKFlash20.swf" output-folder="$USER_HOME$/Downloads/BrightcenterSDK-Flash-2.0/out/production/BrightcenterSDK-Flash-2.0">
+      <configuration name="BrightcenterSDK-Flash-2.0" target-platform="Mobile" main-class="BrightcenterSDKFlash20" output-file="BrightcenterSDKFlash20.swf" output-folder="$MODULE_DIR$/out">
         <dependencies target-player="11.1">
           <entries>
             <entry library-id="7433790c-bbf2-4116-8d62-05569726dc6e">
@@ -15,7 +15,7 @@
         <packaging-air-desktop />
         <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/BrightcenterSDKFlash20-app2.xml" package-file-name="BrightcenterSDKFlash20" />
         <packaging-ios enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/BrightcenterSDKFlash20-app2.xml" package-file-name="BrightcenterSDKFlash20">
-          <AirSigningOptions sdk="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk" />
+          <AirSigningOptions sdk="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk" keystore-path="$USER_HOME$/Desktop/keystore-flash.p12" provisioning-profile-path="$USER_HOME$/Downloads/brightcenter_app_client_flash_local.mobileprovision" />
         </packaging-ios>
       </configuration>
     </configurations>
