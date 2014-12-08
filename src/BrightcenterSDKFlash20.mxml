@@ -34,7 +34,6 @@
         function postResult():void {
             BrightcenterController.postResult(new Result("a", new Date(1408445294992), 2, 11, 3, CompletionStatusEnum.COMPLETED), BrightcenterController.assessmentIdFromUrl, function ():void {
                 trace("something went wrong with posting a result")
-
             });
         }
 
