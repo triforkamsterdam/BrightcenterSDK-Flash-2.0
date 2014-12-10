@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
                xmlns="http://ns.adobe.com/air/application/3.1"
-               preinitialize="BrightcenterController.callBack = appSwitchCallBack; BrightcenterController.application_preinitializeHandler(event);"
+               preinitialize="BrightcenterController.getInstance().setCallBack(appSwitchCallBack); BrightcenterController.getInstance().application_preinitializeHandler(event);"
                applicationComplete="startup();"
                backgroundColor="gray">
     <s:Button label="open bc with assessment"
-              click="BrightcenterController.openBrightcenterApp('2', appSwitchCallBack);" x="20" y="20" height="50"/>
+              click="BrightcenterController.getInstance().openBrightcenterApp('2', appSwitchCallBack);" x="20" y="20" height="50"/>
     <s:Button label="open bc without assessment"
-              click="BrightcenterController.openBrightcenterApp('', appSwitchCallBack);" x="20" y="80" height="50"/>
+              click="BrightcenterController.getInstance().openBrightcenterApp('', appSwitchCallBack);" x="20" y="80" height="50"/>
     <s:Button label="post result!" click="postResult()" x="20" y="140" height="50"/>
     <s:Button label="load results!" click="loadResults()" x="20" y="200" height="50"/>
+    <s:Button label="load results!" click="testPostResultWithKnowValue()" x="20" y="260" height="50"/>
 
     <fx:Script>
 
@@ -20,7 +21,8 @@
         var button;
 
         function startup():void {
-            button = BrightcenterController.createBrightcenterButton("123-456-789", appSwitchCallBack);
+            var controller:BrightcenterController = BrightcenterController.getInstance();
+            button = controller.createBrightcenterButton("123-456-789", appSwitchCallBack);
             addElement(button);
             stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGE, stageOrientationChangeHandler);
         }
@@ -30,15 +32,16 @@
             button.y = FlexGlobals.topLevelApplication.height - 150;
         }
 
-        BrightcenterController.appUrl = "brightcenterAppClientFlash"
+        BrightcenterController.getInstance().setAppUrl("brightcenterAppClientFlash");
         function postResult():void {
-            BrightcenterController.postResult(new Result("a", new Date(1408445294992), 2, 11, 3, CompletionStatusEnum.COMPLETED), BrightcenterController.assessmentIdFromUrl, function ():void {
+            BrightcenterController.getInstance().postResult(new Result("a", new Date(1408445294992), 2, 11, 3, CompletionStatusEnum.COMPLETED), BrightcenterController.getInstance().getAssessmentIdFromUrlVar(), function ():void {
                 trace("something went wrong with posting a result")
             });
         }
 
         function loadResults():void {
-            BrightcenterController.getResults(BrightcenterController.assessmentIdFromUrl, BrightcenterController.student.getPersonId(), function (results:Array):void {
+            var controller:BrightcenterController = BrightcenterController.getInstance();
+            controller.getResults(controller.getAssessmentIdFromUrlVar(), controller.getStudent().getPersonId(), function (results:Array):void {
                 for each(var result in results) {
                     trace(result.getScore() + " " + result.getQuestionId());
                 }
@@ -50,11 +53,26 @@
         function appSwitchCallBack() {
             var studentLabel:Label = new Label();
             studentLabel.move(20, 260);
-            var student:Student = BrightcenterController.student;
+            var student:Student = BrightcenterController.getInstance().getStudent();
             if (student != null) {
                 studentLabel.text = student.getFirstName() + " " + student.getLastName();
             }
             addElement(studentLabel);
+        }
+
+        function testPostResultWithKnowValue(){
+            var student:Student = new Student("52b30b4b30047cf9ded98c75", "max", "bonnier");
+            //cookie: DBB67EA3C49ECF8B21DCA22E45A55083
+            //assessment: 8f306761-b812-4902-85d0-68cf43493898 tracy nl hoofdletters
+            var controller:BrightcenterController = BrightcenterController.getInstance();
+            controller.setCookie("DBB67EA3C49ECF8B21DCA22E45A55083");
+            controller.setStudent(student);
+
+            var result:Result = new Result("A", new Date(1408445294992), 2, 11, 3, CompletionStatusEnum.COMPLETED);
+
+            controller.postResult(result, "8f306761-b812-4902-85d0-68cf43493898", function ():void {
+                trace("something went wrong with posting a result")
+            });
         }
         ]]>
     </fx:Script>

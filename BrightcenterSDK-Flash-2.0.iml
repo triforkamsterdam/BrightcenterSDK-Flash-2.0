@@ -15,7 +15,7 @@
         <packaging-air-desktop />
         <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/BrightcenterSDKFlash20-app2.xml" package-file-name="BrightcenterSDKFlash20" />
         <packaging-ios enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/BrightcenterSDKFlash20-app2.xml" package-file-name="BrightcenterSDKFlash20">
-          <AirSigningOptions sdk="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk" keystore-path="$USER_HOME$/Desktop/keystore-flash.p12" provisioning-profile-path="$USER_HOME$/Downloads/brightcenter_app_client_flash_local.mobileprovision" />
+          <AirSigningOptions sdk="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk" keystore-path="$USER_HOME$/Desktop/keystore-flash.p12" provisioning-profile-path="$USER_HOME$/Downloads/brightcenter_app_client_flash_local.mobileprovision" />
         </packaging-ios>
       </configuration>
     </configurations>

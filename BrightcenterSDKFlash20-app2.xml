@@ -188,6 +188,7 @@
             <key>UIDeviceFamily</key>
             <array>
                 <string>2</string>
+                <string>1</string>
             </array>
             <key>CFBundleURLTypes</key>
 	        <array>

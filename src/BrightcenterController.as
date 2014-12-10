@@ -19,54 +19,116 @@ import flash.net.URLRequestMethod;
 import flash.net.navigateToURL;
 
 import mx.core.FlexGlobals;
-
 import mx.events.FlexEvent;
-
 import mx.utils.Base64Decoder;
 
 import spark.components.Button;
 import spark.components.Group;
 
-
 public class BrightcenterController {
 
-    static var testUrl:String = "brightcenterAppClientCorona://data/eyJsYXN0TmFtZSI6IkJyb3V3ZXIiLCJwZXJzb25JZCI6IjUyYjMwYjRiMzAwNDdjZjlkZWQ5OGM3NiIsImZpcnN0TmFtZSI6Ikx1dWsifQ==/cookie/26A242C9773D40DE4033B5DCDEEB7755/assessmentId/987-654-321";
-    static var student:Student;
-    static var cookie:String;
-    static var assessmentIdFromUrl:String;
-    static var baseURL:String = "http://www.brightcenter.nl/dashboard/api";
-    static var appUrl:String;
-    static var callBack:Function;
+    private var _testUrl:String = "brightcenterAppClientCorona://data/eyJsYXN0TmFtZSI6IkJyb3V3ZXIiLCJwZXJzb25JZCI6IjUyYjMwYjRiMzAwNDdjZjlkZWQ5OGM3NiIsImZpcnN0TmFtZSI6Ikx1dWsifQ==/cookie/26A242C9773D40DE4033B5DCDEEB7755/assessmentId/987-654-321";
+    private var _student:Student;
+    private var _cookie:String;
+    private var _assessmentIdFromUrl:String;
+    private var _baseURL:String = "http://www.brightcenter.nl/dashboard/api";
+    private var _appUrl:String;
+    private var _callBack:Function;
+    private static var _instance:BrightcenterController;
+
     public function BrightcenterController() {
         trace("init brightcenterController")
     }
 
+    public static function getInstance():BrightcenterController {
+        if (_instance == null) {
+            trace("created new instance of Brightcentercontroller")
+            _instance = new BrightcenterController();
+        }
+        return _instance;
+    }
 
-    static function application_preinitializeHandler(event:FlexEvent):void
-    {
+
+    public function getTestUrl():String {
+        return _testUrl;
+    }
+
+    public function setTestUrl(value:String):void {
+        _testUrl = value;
+    }
+
+    public function getStudent():Student {
+        return _student;
+    }
+
+    public function setStudent(value:Student):void {
+        _student = value;
+    }
+
+    public function getCookie():String {
+        return _cookie;
+    }
+
+    public function setCookie(value:String):void {
+        _cookie = value;
+    }
+
+    public function getAssessmentIdFromUrlVar():String {
+        return _assessmentIdFromUrl;
+    }
+
+    public function setAssessmentIdFromUrl(value:String):void {
+        _assessmentIdFromUrl = value;
+    }
+
+    public function getBaseURL():String {
+        return _baseURL;
+    }
+
+    public function seBaseURL(value:String):void {
+        _baseURL = value;
+    }
+
+    public function getAppUrl():String {
+        return _appUrl;
+    }
+
+    public function setAppUrl(value:String):void {
+        _appUrl = value;
+    }
+
+    public function getCallBack():Function {
+        return _callBack;
+    }
+
+    public function setCallBack(value:Function):void {
+        _callBack = value;
+    }
+
+
+    public function application_preinitializeHandler(event:FlexEvent):void {
         trace("preinitialize");
         NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, onInvoke);
     }
 
-    static function onInvoke(event:InvokeEvent):void
-    {
+    function onInvoke(event:InvokeEvent):void {
         trace("on invoke!");
-        if(event.arguments[0]!=null) {
-            BrightcenterController.handleUrl(event.arguments[0]);
-            BrightcenterController.callBack();
+        if (event.arguments[0] != null) {
+            handleUrl(event.arguments[0]);
+            _callBack()
         }
     }
 
-    static function handleUrl(url:String):void {
-        BrightcenterController.student = getStudentFromUrl(url);
-        trace("student: " + BrightcenterController.student.getFirstName() + " " + BrightcenterController.student.getLastName());
-        BrightcenterController.cookie = getCookieFromUrl(url);
-        trace("Cookie: " + BrightcenterController.cookie);
-        BrightcenterController.assessmentIdFromUrl = getAssessmentIdFromUrl(url)
-        trace("assessmentId from url: " + BrightcenterController.assessmentIdFromUrl);
+    public function handleUrl(url:String):void {
+        _student = getStudentFromUrl(url);
+        trace("_student: " + _student.getFirstName() + " " + _student.getLastName());
+        _cookie = getCookieFromUrl(url);
+        trace("Cookie: " + _cookie);
+        _assessmentIdFromUrl = getAssessmentIdFromUrl(url)
+        trace("assessmentId from url: " + _assessmentIdFromUrl);
     }
 
-    static function getStudentFromUrl(url:String):Student{
+    function getStudentFromUrl(url:String):Student {
         var pattern1:RegExp = new RegExp(".*data/", "");
         var pattern2:RegExp = new RegExp("/cookie/.*", "")
         var data:String = url.replace(pattern1, "");
@@ -79,7 +141,7 @@ public class BrightcenterController {
         return student;
     }
 
-    static function getCookieFromUrl(url:String):String{
+    function getCookieFromUrl(url:String):String {
         var cookie = "";
         var pattern1:RegExp = new RegExp(".*cookie/", "");
         var pattern2:RegExp = new RegExp("/assessmentId.*", "")
@@ -88,17 +150,17 @@ public class BrightcenterController {
         return cookie;
     }
 
-    static function getAssessmentIdFromUrl(url:String):String{
+    function getAssessmentIdFromUrl(url:String):String {
         var pattern:RegExp = new RegExp(".*/assessmentId")
         var data:String = url.replace(pattern, "");
         data = data.replace("/", "");
         return data;
     }
 
-    static function getResults(assessmentId:String, personId:String, callBackSucces:Function, callBackError:Function){
+    function getResults(assessmentId:String, personId:String, callBackSucces:Function, callBackError:Function) {
         var path:String = "/assessment/" + assessmentId + "/students/" + personId + "/assessmentItemResult";
-        var cookieHeader:URLRequestHeader = new URLRequestHeader("Cookie", "JSESSIONID=" + BrightcenterController.cookie);
-        var request:URLRequest = new URLRequest(BrightcenterController.baseURL + path);
+        var cookieHeader:URLRequestHeader = new URLRequestHeader("Cookie", "JSESSIONID=" + _cookie);
+        var request:URLRequest = new URLRequest(_baseURL + path);
         request.requestHeaders.push(cookieHeader);
 
         var loader:URLLoader = new URLLoader();
@@ -110,26 +172,26 @@ public class BrightcenterController {
         function urlLoaderComplete(evt:Event):void {
             trace("data: " + loader.data);
             var results:Object = JSON.parse(loader.data);
-            var newResults:Array= new Array();
-            for each(var i in results){
+            var newResults:Array = new Array();
+            for each(var i in results) {
                 var result:Result = new Result(i.questionId, new Date(i.date), i.attempts, i.duration, i.score, i.completionStatus);
                 newResults.push(result);
             }
             callBackSucces(newResults);
         }
 
-        function urlLoaderError(evt:IOErrorEvent):void{
+        function urlLoaderError(evt:IOErrorEvent):void {
             callBackError();
         }
     }
 
-    static function postResult(result:Result, assessmentId:String, callBackError:Function){
-        var path:String = "/assessment/" + assessmentId + "/student/" + BrightcenterController.student.getPersonId() + "/assessmentItemResult/" + result.getQuestionId();
-        var cookieHeader:URLRequestHeader = new URLRequestHeader("Cookie", "JSESSIONID=" + BrightcenterController.cookie);
+    function postResult(result:Result, assessmentId:String, callBackError:Function) {
+        var path:String = "/assessment/" + assessmentId + "/student/" + _student.getPersonId() + "/assessmentItemResult/" + result.getQuestionId();
+        var cookieHeader:URLRequestHeader = new URLRequestHeader("Cookie", "JSESSIONID=" + _cookie);
         var json:String = "{\"duration\":" + result.getDuration() + ", \"score\":" + result.getScore() + ", \"completionStatus\":\"" + result.getCompletionStatus() + "\"}";
         trace(json);
 
-        var request:URLRequest = new URLRequest(BrightcenterController.baseURL + path);
+        var request:URLRequest = new URLRequest(_baseURL + path);
         request.method = URLRequestMethod.POST;
         request.data = json;
         request.requestHeaders.push(cookieHeader);
@@ -140,18 +202,18 @@ public class BrightcenterController {
         loader.addEventListener(IOErrorEvent.IO_ERROR, urlLoaderError);
         loader.load(request);
 
-        function urlLoaderError(evt:IOErrorEvent):void{
+        function urlLoaderError(evt:IOErrorEvent):void {
             callBackError();
         }
     }
 
-    static function openBrightcenterApp(assessmentId:String, callBack:Function):void{
+    function openBrightcenterApp(assessmentId:String, callBack:Function):void {
         trace("opening brightcenter app");
-        BrightcenterController.callBack = callBack;
-        navigateToURL(new URLRequest("brightcenterApp://protocolName/" + BrightcenterController.appUrl + "/assessmentId/" + assessmentId));
+        _callBack = callBack;
+        navigateToURL(new URLRequest("brightcenterApp://protocolName/" + _appUrl + "/assessmentId/" + assessmentId));
     }
 
-    static function createBrightcenterButton(assessmentId:String, callBack:Function):Button{
+    function createBrightcenterButton(assessmentId:String, callBack:Function):Button {
         trace(FlexGlobals.topLevelApplication.width + " x " + FlexGlobals.topLevelApplication.height);
         var container = new Group();
         var screenWidth = FlexGlobals.topLevelApplication.width;
