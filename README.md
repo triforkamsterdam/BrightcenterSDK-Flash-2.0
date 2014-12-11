@@ -29,11 +29,11 @@ To use the sdk you need to do a few things. First you'll need to put the followi
 
 ###Get an instance
 To get a singleton instance of the Brightcentercontroller you can call: `var controller = BrightcenterController.getInstance()`. Use this instance to communicate with Brightcenter.
- The second thing you'll need to do is to create a callback for when your app is being switched to. In the demo this is done in the preinitialize event by using `controller.setCallback(appSwitchCallBack)`. 
+ The second thing you'll need to do is to create a callback for when your app is being switched to. In the demo this is done in the preinitialize event by using `controller.setCallBack(appSwitchCallBack)`. 
  
  You also need to set the app url to your chosen url scheme by doing this: `controller.setAppUrl("YOURAPPURL")`. 
  
- you also need to make a call to `controller.application_preinitializeHandler(event);` here. This ensures that the appswitch will be activated. After the appswitch is done, you callback will be made. From there you can do whatever you want. 
+ you also need to make a call to `controller.application_preinitializeHandler();` here. This ensures that the appswitch will be activated. After the appswitch is done, you callback will be made. From there you can do whatever you want. 
  
 You can acces the student that is picked by using: `controller.getStudent()` You can look into the `student.as` file for which variables it has.
 
