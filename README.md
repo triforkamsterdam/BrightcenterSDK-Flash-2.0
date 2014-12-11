@@ -26,18 +26,21 @@ To use the sdk you need to do a few things. First you'll need to put the followi
 		            </dict>
 	        </array>
 ```
- The second thing you'll need to do is to create a callback for when your app is being switched to. In the demo this is done in the preinitialize event by using `BrightcenterController.callback = appSwitchCallBack`. 
+
+###Get an instance
+To get a singleton instance of the Brightcentercontroller you can call: `var controller = BrightcenterController.getInstance()`. Use this instance to communicate with Brightcenter.
+ The second thing you'll need to do is to create a callback for when your app is being switched to. In the demo this is done in the preinitialize event by using `controller.setCallback(appSwitchCallBack)`. 
  
- You also need to set the app url to your chosen url scheme by doing this: `BrightcenterController.appUrl = "YOURAPPURL"`. 
+ You also need to set the app url to your chosen url scheme by doing this: `controller.setAppUrl("YOURAPPURL")`. 
  
- you also need to make a call to `BrightcenterController.application_preinitializeHandler(event);` here. This ensures that the appswitch will be activated. After the appswitch is done, you callback will be made. From there you can do whatever you want. 
+ you also need to make a call to `controller.application_preinitializeHandler(event);` here. This ensures that the appswitch will be activated. After the appswitch is done, you callback will be made. From there you can do whatever you want. 
  
-You can acces the student that is picked by using: `BrightcenterController.student` You can look into the `student.as` file for which variables it has.
+You can acces the student that is picked by using: `controller.getStudent()` You can look into the `student.as` file for which variables it has.
 
 ###Open the Brightcenter App
  To add the Brightcenter button you can use the following code:
 ```
-button = BrightcenterController.createBrightcenterButton("ASSESSMENTID", appSwitchCallBack);
+button = controller.createBrightcenterButton("ASSESSMENTID", appSwitchCallBack);
 addElement(button);
 ```
 the assessment id can also be empty but NOT null! This function will open the brightcenter app with the given assessmentId. The appswitchCallback will be called when the Brightcenter app opens your app again.
@@ -53,9 +56,9 @@ See the source code for examples
  
 BEFORE YOU MAKE THE FOLLOWING CALLS MAKE SURE YOUR APP IS OPENED BY URL OR APP!
 ###Posting a result
- to post a result you can call `BrightcenterController.postResult(result:Result, assessmentId:String, callBackError:Function)` The callback will only be called when an error occured.
+ to post a result you can call `controller.postResult(result:Result, assessmentId:String, callBackError:Function)` The callback will only be called when an error occured.
  
 ###Retrieve results
- To retrieve a result you can call `BrightcenterController.getResults(assessmentId:String, personId:String, callBackSucces:Function, callBackError:Function)`. The succes callback will return you an array with all the results of the student. The error callback will be called when something went wrong. The personId of a student can be retrieved by using `BrightcenterController.student.getPersonId();`
+ To retrieve a result you can call `controller.getResults(assessmentId:String, personId:String, callBackSucces:Function, callBackError:Function)`. The succes callback will return you an array with all the results of the student. The error callback will be called when something went wrong. The personId of a student can be retrieved by using `controller.getStudent().getPersonId();`
  
  See the demo files for examples.
