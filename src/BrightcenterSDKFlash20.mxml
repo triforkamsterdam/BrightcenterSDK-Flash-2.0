@@ -16,13 +16,15 @@
 
         <![CDATA[
         import mx.core.FlexGlobals;
+        import mx.events.FlexEvent;
+
         import spark.components.Label;
 
         var button;
 
         function startup():void {
             var controller:BrightcenterController = BrightcenterController.getInstance();
-            button = controller.createBrightcenterButton("123-456-789", appSwitchCallBack);
+            button = controller.createBrightcenterButton("123-456-789", appSwitchCallBack, FlexGlobals.topLevelApplication.width, FlexGlobals.topLevelApplication.height);
             addElement(button);
             stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGE, stageOrientationChangeHandler);
         }

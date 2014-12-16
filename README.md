@@ -40,12 +40,12 @@ You can acces the student that is picked by using: `controller.getStudent()` You
 ###Open the Brightcenter App
  To add the Brightcenter button you can use the following code:
 ```
-button = controller.createBrightcenterButton("ASSESSMENTID", appSwitchCallBack);
+button = controller.createBrightcenterButton("ASSESSMENTID", appSwitchCallBack, screenWidth, screenHeight);
 addElement(button);
 ```
 the assessment id can also be empty but NOT null! This function will open the brightcenter app with the given assessmentId. The appswitchCallback will be called when the Brightcenter app opens your app again.
 
-To handle orientationchange you can add the following in your StageOrientationEvent:
+To handle orientationchange you can add the following in your StageOrientationEvent(These values just need to be the width and the height of the stage):
 ```
 button.x = FlexGlobals.topLevelApplication.width - 150;
 button.y = FlexGlobals.topLevelApplication.height - 150;

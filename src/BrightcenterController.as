@@ -212,11 +212,9 @@ public class BrightcenterController {
         navigateToURL(new URLRequest("brightcenterApp://protocolName/" + _appUrl + "/assessmentId/" + assessmentId));
     }
 
-    public function createBrightcenterButton(assessmentId:String, callBack:Function):Button {
+    public function createBrightcenterButton(assessmentId:String, callBack:Function, screenWidth:int, screenHeight:int):Button {
         trace(FlexGlobals.topLevelApplication.width + " x " + FlexGlobals.topLevelApplication.height);
         var container = new Group();
-        var screenWidth = FlexGlobals.topLevelApplication.width;
-        var screenHeight = FlexGlobals.topLevelApplication.height;
 
         var button = new Button();
         button.x = screenWidth - 150;
