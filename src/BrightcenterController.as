@@ -213,7 +213,6 @@ public class BrightcenterController {
     }
 
     public function createBrightcenterButton(assessmentId:String, callBack:Function, screenWidth:int, screenHeight:int):Button {
-        trace(FlexGlobals.topLevelApplication.width + " x " + FlexGlobals.topLevelApplication.height);
         var container = new Group();
 
         var button = new Button();
