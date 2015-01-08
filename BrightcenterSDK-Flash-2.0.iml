@@ -8,6 +8,12 @@
             <entry library-id="7433790c-bbf2-4116-8d62-05569726dc6e">
               <dependency linkage="Merged" />
             </entry>
+            <entry library-id="b10c14f3-3586-4075-9e15-fedd738971e3">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="f4296e87-5314-4a08-97f1-89760a392cb6">
+              <dependency linkage="Merged" />
+            </entry>
           </entries>
           <sdk name="flex_sdk_newest" />
         </dependencies>
@@ -55,6 +61,26 @@
         <jarDirectory url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/locale/fr_FR" recursive="false" />
         <jarDirectory url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/locale/ja_JP" recursive="false" />
         <jarDirectory url="file://$USER_HOME$/Downloads/AIRSDK_Compiler/frameworks/locale/zh_CN" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="b10c14f3-3586-4075-9e15-fedd738971e3" />
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Programs/flex_sdk_newest/frameworks/libs/mx/mx.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="f4296e87-5314-4a08-97f1-89760a392cb6" />
+        <CLASSES>
+          <root url="file://$USER_HOME$/Programs/flex_sdk_newest/frameworks/projects/mx/src" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>

@@ -18,11 +18,12 @@ import flash.net.URLRequestHeader;
 import flash.net.URLRequestMethod;
 import flash.net.navigateToURL;
 
+import mx.controls.Button;
+
 import mx.core.FlexGlobals;
 import mx.events.FlexEvent;
 import mx.utils.Base64Decoder;
 
-import spark.components.Button;
 import spark.components.Group;
 
 public class BrightcenterController {
@@ -212,13 +213,15 @@ public class BrightcenterController {
         navigateToURL(new URLRequest("brightcenterApp://protocolName/" + _appUrl + "/assessmentId/" + assessmentId));
     }
 
-    public function createBrightcenterButton(assessmentId:String, callBack:Function, screenWidth:int, screenHeight:int):Button {
-        var container = new Group();
-
-        var button = new Button();
+    //add mx.swc include frameworks/projects/mx/src
+    public function createBrightcenterButton(assessmentId:String, callBack:Function, screenWidth:int, screenHeight:int):mx.controls.Button{
+        var button:Button = new Button();
         button.x = screenWidth - 150;
         button.y = screenHeight - 150;
-        button.setStyle("skinClass", Class(BrightcenterButtonSkin));
+        button.setStyle("overSkin", Class(BrightcenterButtonSkin));
+        button.setStyle("upSkin", Class(BrightcenterButtonSkin));
+        button.setStyle("downSkin", Class(BrightcenterButtonSkin));
+
 
         button.addEventListener("click", function myBtn_clickHandler(event:MouseEvent):void {
             openBrightcenterApp(assessmentId, callBack);
