@@ -17,18 +17,13 @@ import flash.net.URLRequest;
 import flash.net.URLRequestHeader;
 import flash.net.URLRequestMethod;
 import flash.net.navigateToURL;
+import flash.utils.Dictionary;
 
 import mx.controls.Button;
-
-import mx.core.FlexGlobals;
-import mx.events.FlexEvent;
 import mx.utils.Base64Decoder;
-
-import spark.components.Group;
 
 public class BrightcenterController {
 
-    private var _testUrl:String = "brightcenterAppClientCorona://data/eyJsYXN0TmFtZSI6IkJyb3V3ZXIiLCJwZXJzb25JZCI6IjUyYjMwYjRiMzAwNDdjZjlkZWQ5OGM3NiIsImZpcnN0TmFtZSI6Ikx1dWsifQ==/cookie/26A242C9773D40DE4033B5DCDEEB7755/assessmentId/987-654-321";
     private var _student:Student;
     private var _cookie:String;
     private var _assessmentIdFromUrl:String;
@@ -47,14 +42,6 @@ public class BrightcenterController {
             _instance = new BrightcenterController();
         }
         return _instance;
-    }
-
-    public function getTestUrl():String {
-        return _testUrl;
-    }
-
-    public function setTestUrl(value:String):void {
-        _testUrl = value;
     }
 
     public function getStudent():Student {
@@ -120,41 +107,29 @@ public class BrightcenterController {
     }
 
     public function handleUrl(url:String):void {
-        _student = getStudentFromUrl(url);
+        var paramPairs : Array = url.split("?")[1].split("&");
+        var dict = new Dictionary();
+        for each (var pair : String in paramPairs){
+            var param : Array = pair.split("=");
+            trace("key: " + param[0] + ", value: " + param[1]);
+            dict[param[0]] = param[1];
+        }
+        _student = getStudentFromUrl(dict["data"]);
         trace("_student: " + _student.getFirstName() + " " + _student.getLastName());
-        _cookie = getCookieFromUrl(url);
+        _cookie = dict["cookie"];
         trace("Cookie: " + _cookie);
-        _assessmentIdFromUrl = getAssessmentIdFromUrl(url)
+        _assessmentIdFromUrl = dict["assessmentId"];
         trace("assessmentId from url: " + _assessmentIdFromUrl);
     }
 
-    public function getStudentFromUrl(url:String):Student {
-        var pattern1:RegExp = new RegExp(".*data/", "");
-        var pattern2:RegExp = new RegExp("/cookie/.*", "")
-        var data:String = url.replace(pattern1, "");
-        data = data.replace(pattern2, "")
+    public function getStudentFromUrl(data:String):Student {
+        data = data.replace("*", "=");
+        trace(data);
         var b64:Base64Decoder = new Base64Decoder();
         b64.decode(data);
-
         var result:Object = JSON.parse(b64.toByteArray().toString());
         var student:Student = new Student(result.personId, result.firstName, result.lastName);
         return student;
-    }
-
-    public function getCookieFromUrl(url:String):String {
-        var cookie = "";
-        var pattern1:RegExp = new RegExp(".*cookie/", "");
-        var pattern2:RegExp = new RegExp("/assessmentId.*", "")
-        var data:String = url.replace(pattern1, "");
-        cookie = data.replace(pattern2, "")
-        return cookie;
-    }
-
-    public function getAssessmentIdFromUrl(url:String):String {
-        var pattern:RegExp = new RegExp(".*/assessmentId")
-        var data:String = url.replace(pattern, "");
-        data = data.replace("/", "");
-        return data;
     }
 
     public function getResults(assessmentId:String, personId:String, callBackSucces:Function, callBackError:Function) {
@@ -210,11 +185,11 @@ public class BrightcenterController {
     public function openBrightcenterApp(assessmentId:String, callBack:Function):void {
         trace("opening brightcenter app");
         _callBack = callBack;
-        navigateToURL(new URLRequest("brightcenterApp://protocolName/" + _appUrl + "/assessmentId/" + assessmentId));
+        navigateToURL(new URLRequest("brightcenterApp://?protocolName=" + _appUrl + "&assessmentId=" + assessmentId));
     }
 
     //add mx.swc include frameworks/projects/mx/src
-    public function createBrightcenterButton(assessmentId:String, callBack:Function, screenWidth:int, screenHeight:int):mx.controls.Button{
+    public function createBrightcenterButton(assessmentId:String, callBack:Function, screenWidth:int, screenHeight:int):Button{
         var button:Button = new Button();
         button.x = screenWidth - 150;
         button.y = screenHeight - 150;

@@ -10,7 +10,8 @@
               click="BrightcenterController.getInstance().openBrightcenterApp('', appSwitchCallBack);" x="20" y="80" height="50"/>
     <s:Button label="post result!" click="postResult()" x="20" y="140" height="50"/>
     <s:Button label="load results!" click="loadResults()" x="20" y="200" height="50"/>
-    <s:Button label="load results!" click="testPostResultWithKnowValue()" x="20" y="260" height="50"/>
+    <s:Button label="testpostresult" click="testPostResultWithKnowValue()" x="20" y="260" height="50"/>
+    <s:Button label="test read url" click="testReadUrl()" x="20" y="320" height="50"/>
 
     <fx:Script>
 
@@ -75,6 +76,11 @@
             controller.postResult(result, "8f306761-b812-4902-85d0-68cf43493898", function ():void {
                 trace("something went wrong with posting a result")
             });
+        }
+
+        function testReadUrl(){
+            var controller:BrightcenterController = BrightcenterController.getInstance();
+            controller.handleUrl("brightcenterAppClientCorona://?data=eyJsYXN0TmFtZSI6IkJ1aXRlbWFuIiwicGVyc29uSWQiOiI1MmIzMGI0YjMwMDQ3Y2Y5ZGVkOThjNzciLCJmaXJzdE5hbWUiOiJSaWNrIn0*&cookie=6E4696144522046F9EF0CAE2D953999D&assessmentId=987-654-321");
         }
         ]]>
     </fx:Script>
