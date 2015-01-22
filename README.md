@@ -8,7 +8,7 @@ When you register or edit an assessment you can change your appUrl. your appUrl 
 When the BrightcenterApp is finished it'll open your app in the same way. 
 
 ###Download the project
-To use this SDK you need to download this project. You'll need to at least include  brightcenterController.as into your own project by just adding it to your project folder.
+To use this SDK you need to download this project. You can include all the source files or you can simply add the BrightcenterSDK-Flash-2_0-library.swc as an dependency of your project. If you use FLash cc you MUST add the .swc file as a dependency
 
 ###Use the sdk
 To use the sdk you need to do a few things. First you'll need to put the following in your {project}-app.xml:
